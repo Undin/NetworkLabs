@@ -1,4 +1,4 @@
-package com.pendryak.udp;
+package com.ifmo.udp;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

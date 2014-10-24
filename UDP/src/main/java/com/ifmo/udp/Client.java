@@ -1,4 +1,4 @@
-package com.pendryak.udp;
+package com.ifmo.udp;
 
 import java.util.Deque;
 import java.util.LinkedList;
