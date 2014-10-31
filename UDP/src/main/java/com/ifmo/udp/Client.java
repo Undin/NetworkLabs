@@ -1,5 +1,7 @@
 package com.ifmo.udp;
 
+import com.ifmo.networklab.utils.BytesUtils;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -19,8 +21,8 @@ public class Client implements Comparable<Client> {
     public Client(byte[] data) {
         creationTime = System.currentTimeMillis();
         times.addLast(creationTime);
-        ip = bytesToString(data, 0, 4, '.', false);
-        mac = bytesToString(data, 4, 6, ':', true);
+        ip = BytesUtils.ipFromBytes(data, 0);
+        mac = BytesUtils.macFromBytes(data, 4);
         int length = 10;
         while (data[length] != 0) {
             length++;
@@ -81,19 +83,5 @@ public class Client implements Comparable<Client> {
         long expectedPackets = (interval + TIMEOUT - 1) / TIMEOUT;
         lost = Math.max(0, expectedPackets - times.size());
         return false;
-    }
-
-    private static String bytesToString(byte[] bytes, int start, int length, char delim, boolean toHex) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = start; i < start + length - 1; i++) {
-            builder.append(byteToString(bytes[i], toHex)).append(delim);
-        }
-        builder.append(byteToString(bytes[start + length - 1], toHex));
-        return builder.toString();
-    }
-
-    private static String byteToString(byte b, boolean toHex) {
-        int i = b & 0xFF;
-        return toHex ? (i < 16 ? "0" : "") + Integer.toHexString(i).toUpperCase() : Integer.toString(i);
     }
 }
