@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
  */
 public class BytesUtils {
 
+    private static final byte[] ZERO_ARRAY = new byte[]{0};
+
     public static byte[] longToBytes(long l) {
         return ByteBuffer.allocate(Long.BYTES).putLong(l).array();
     }
@@ -23,7 +25,7 @@ public class BytesUtils {
         return ByteBuffer.wrap(bytes, pos, 8).getLong();
     }
 
-    public static byte[] mergeBytes(byte[] ... bytes) {
+    public static byte[] mergeBytes(byte[]... bytes) {
         int length = 0;
         for (byte[] b : bytes) {
             length += b.length;
@@ -35,6 +37,10 @@ public class BytesUtils {
             pos += b.length;
         }
         return data;
+    }
+
+    public static byte[] nullTerminatedString(String string) {
+        return mergeBytes(string.getBytes(), ZERO_ARRAY);
     }
 
     public static String ipFromBytes(byte[] bytes, int pos) {
