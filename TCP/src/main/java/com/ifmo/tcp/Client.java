@@ -1,5 +1,6 @@
 package com.ifmo.tcp;
 
+import com.ifmo.networklab.utils.CopyUtils;
 import com.ifmo.tcp.command.*;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;

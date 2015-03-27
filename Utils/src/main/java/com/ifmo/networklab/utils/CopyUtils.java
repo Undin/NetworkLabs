@@ -1,4 +1,4 @@
-package com.ifmo.tcp;
+package com.ifmo.networklab.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
