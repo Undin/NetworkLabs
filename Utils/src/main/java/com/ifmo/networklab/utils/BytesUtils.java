@@ -43,7 +43,14 @@ public class BytesUtils {
         return mergeBytes(string.getBytes(), ZERO_ARRAY);
     }
 
+    public static String ipFromBytes(byte[] bytes) {
+        return ipFromBytes(bytes, 0);
+    }
+
     public static String ipFromBytes(byte[] bytes, int pos) {
+        if (bytes == null) {
+            return "null";
+        }
         StringBuilder builder = new StringBuilder(7);
         for (int i = 0; i < 3; i++) {
             builder.append(bytes[pos + i] & 0xFF);
