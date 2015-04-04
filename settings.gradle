@@ -3,4 +3,5 @@ rootProject.name = 'NetworkLabs'
 include 'UDP'
 include 'TCP'
 include 'Utils'
+include 'Exam'
 
