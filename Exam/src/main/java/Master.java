@@ -18,12 +18,15 @@ public class Master {
     private static List<Socket> sockets = new ArrayList<>();
     private static Random random = new Random();
 
+    private static BroadcastSender sender = new BroadcastSender();
 
     public static void main(String[] args) {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(PORT);
+
             startTimer();
+            sender.startSend();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,6 +47,7 @@ public class Master {
     }
 
     public static void addSocket(final Socket socket) {
+        System.out.println("add socket: " + BytesUtils.ipFromBytes(socket.getInetAddress().getAddress()));
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -63,7 +67,7 @@ public class Master {
                 synchronized (sockets) {
                     for (Socket socket : sockets) {
                         try {
-                            socket.getOutputStream().write(ByteBuffer.allocate(Integer.BYTES).putInt(color).array());
+                            socket.getOutputStream().write(ByteBuffer.allocate(4).putInt(color).array());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

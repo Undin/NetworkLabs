@@ -9,13 +9,13 @@ public class BytesUtils {
 
     private static final byte[] ZERO_ARRAY = new byte[]{0};
 
-    public static byte[] longToBytes(long l) {
-        return ByteBuffer.allocate(Long.BYTES).putLong(l).array();
-    }
-
-    public static byte[] intToBytes(int i) {
-        return ByteBuffer.allocate(Integer.BYTES).putInt(i).array();
-    }
+//    public static byte[] longToBytes(long l) {
+//        return ByteBuffer.allocate(Long.BYTES).putLong(l).array();
+//    }
+//
+//    public static byte[] intToBytes(int i) {
+//        return ByteBuffer.allocate(Integer.BYTES).putInt(i).array();
+//    }
 
     public static int bytesToInt(byte[] bytes, int pos) {
         return ByteBuffer.wrap(bytes, pos, 4).getInt();

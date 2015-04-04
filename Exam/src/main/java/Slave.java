@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,15 @@ public class Slave {
 
     private static JFrame frame = new JFrame();
 
+    private static BroadcastReceiver receiver = new BroadcastReceiver();
+
     public static void main(String[] args) {
+        try {
+            receiver.startReceive();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setSize(400, 400);
@@ -29,6 +38,7 @@ public class Slave {
                 DataInputStream inputStream = new DataInputStream(socket.getInputStream());
                 while (true) {
                     int color = inputStream.readInt();
+                    System.out.println("color: " + color);
                     frame.getContentPane().setBackground(new Color(color));
                 }
             } catch (IOException e) {
